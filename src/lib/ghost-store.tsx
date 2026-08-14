@@ -202,7 +202,7 @@ export const todayISO = () => {
 export const daysUntil = (iso: string) => {
   if (!iso) return 9999;
   const [y, m, d] = iso.split("-").map(Number);
-  const target = new Date(y, (m ?? 1) - 1, d ?? 1);
+  const target = new Date(y ?? 1970, (m ?? 1) - 1, d ?? 1);
   const now = new Date();
   now.setHours(0, 0, 0, 0);
   return Math.round((target.getTime() - now.getTime()) / 86400000);
