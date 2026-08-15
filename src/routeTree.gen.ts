@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CalendarRouteImport } from './routes/calendar'
 import { Route as FinanceRouteImport } from './routes/finance'
+import { Route as NotesRouteImport } from './routes/notes'
 import { Route as RemindersRouteImport } from './routes/reminders'
 
 const IndexRoute = IndexRouteImport.update({
@@ -29,6 +30,11 @@ const FinanceRoute = FinanceRouteImport.update({
   path: '/finance',
   getParentRoute: () => rootRouteImport,
 } as any)
+const NotesRoute = NotesRouteImport.update({
+  id: '/notes',
+  path: '/notes',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RemindersRoute = RemindersRouteImport.update({
   id: '/reminders',
   path: '/reminders',
@@ -39,12 +45,14 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/calendar': typeof CalendarRoute
   '/finance': typeof FinanceRoute
+  '/notes': typeof NotesRoute
   '/reminders': typeof RemindersRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/calendar': typeof CalendarRoute
   '/finance': typeof FinanceRoute
+  '/notes': typeof NotesRoute
   '/reminders': typeof RemindersRoute
 }
 export interface FileRoutesById {
@@ -52,20 +60,22 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/calendar': typeof CalendarRoute
   '/finance': typeof FinanceRoute
+  '/notes': typeof NotesRoute
   '/reminders': typeof RemindersRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/calendar' | '/finance' | '/reminders'
+  fullPaths: '/' | '/calendar' | '/finance' | '/notes' | '/reminders'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/calendar' | '/finance' | '/reminders'
-  id: '__root__' | '/' | '/calendar' | '/finance' | '/reminders'
+  to: '/' | '/calendar' | '/finance' | '/notes' | '/reminders'
+  id: '__root__' | '/' | '/calendar' | '/finance' | '/notes' | '/reminders'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CalendarRoute: typeof CalendarRoute
   FinanceRoute: typeof FinanceRoute
+  NotesRoute: typeof NotesRoute
   RemindersRoute: typeof RemindersRoute
 }
 
@@ -92,6 +102,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FinanceRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/notes': {
+      id: '/notes'
+      path: '/notes'
+      fullPath: '/notes'
+      preLoaderRoute: typeof NotesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/reminders': {
       id: '/reminders'
       path: '/reminders'
@@ -106,6 +123,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CalendarRoute: CalendarRoute,
   FinanceRoute: FinanceRoute,
+  NotesRoute: NotesRoute,
   RemindersRoute: RemindersRoute,
 }
 export const routeTree = rootRouteImport
