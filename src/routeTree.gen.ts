@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CalendarRouteImport } from './routes/calendar'
 import { Route as FinanceRouteImport } from './routes/finance'
+import { Route as HealthRouteImport } from './routes/health'
 import { Route as NotesRouteImport } from './routes/notes'
 import { Route as RemindersRouteImport } from './routes/reminders'
 
@@ -30,6 +31,11 @@ const FinanceRoute = FinanceRouteImport.update({
   path: '/finance',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HealthRoute = HealthRouteImport.update({
+  id: '/health',
+  path: '/health',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const NotesRoute = NotesRouteImport.update({
   id: '/notes',
   path: '/notes',
@@ -45,6 +51,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/calendar': typeof CalendarRoute
   '/finance': typeof FinanceRoute
+  '/health': typeof HealthRoute
   '/notes': typeof NotesRoute
   '/reminders': typeof RemindersRoute
 }
@@ -52,6 +59,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/calendar': typeof CalendarRoute
   '/finance': typeof FinanceRoute
+  '/health': typeof HealthRoute
   '/notes': typeof NotesRoute
   '/reminders': typeof RemindersRoute
 }
@@ -60,21 +68,31 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/calendar': typeof CalendarRoute
   '/finance': typeof FinanceRoute
+  '/health': typeof HealthRoute
   '/notes': typeof NotesRoute
   '/reminders': typeof RemindersRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/calendar' | '/finance' | '/notes' | '/reminders'
+  fullPaths:
+    '/' | '/calendar' | '/finance' | '/health' | '/notes' | '/reminders'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/calendar' | '/finance' | '/notes' | '/reminders'
-  id: '__root__' | '/' | '/calendar' | '/finance' | '/notes' | '/reminders'
+  to: '/' | '/calendar' | '/finance' | '/health' | '/notes' | '/reminders'
+  id:
+    | '__root__'
+    | '/'
+    | '/calendar'
+    | '/finance'
+    | '/health'
+    | '/notes'
+    | '/reminders'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CalendarRoute: typeof CalendarRoute
   FinanceRoute: typeof FinanceRoute
+  HealthRoute: typeof HealthRoute
   NotesRoute: typeof NotesRoute
   RemindersRoute: typeof RemindersRoute
 }
@@ -102,6 +120,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FinanceRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/health': {
+      id: '/health'
+      path: '/health'
+      fullPath: '/health'
+      preLoaderRoute: typeof HealthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/notes': {
       id: '/notes'
       path: '/notes'
@@ -123,6 +148,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CalendarRoute: CalendarRoute,
   FinanceRoute: FinanceRoute,
+  HealthRoute: HealthRoute,
   NotesRoute: NotesRoute,
   RemindersRoute: RemindersRoute,
 }
