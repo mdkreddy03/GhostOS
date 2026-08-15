@@ -34,7 +34,7 @@ export type Todo = {
   title: string;
   date: string; // yyyy-mm-dd
   done: boolean;
-  note?: string;
+  note?: string | undefined;
 };
 
 export type Reminder = {
@@ -53,8 +53,8 @@ export type Obligation = {
   kind: "auto-insurance" | "credit-card" | "debt" | "auto-loan" | "rent" | "other";
   amount: number;
   dueDate: string; // yyyy-mm-dd
-  balance?: number;
-  apr?: number;
+  balance?: number | undefined;
+  apr?: number | undefined;
 };
 
 export type Finance = {
