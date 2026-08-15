@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as CalendarRouteImport } from './routes/calendar'
 import { Route as FinanceRouteImport } from './routes/finance'
 import { Route as FoodRouteImport } from './routes/food'
+import { Route as GroceryRouteImport } from './routes/grocery'
 import { Route as HealthRouteImport } from './routes/health'
 import { Route as NotesRouteImport } from './routes/notes'
 import { Route as RemindersRouteImport } from './routes/reminders'
@@ -37,6 +38,11 @@ const FoodRoute = FoodRouteImport.update({
   path: '/food',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GroceryRoute = GroceryRouteImport.update({
+  id: '/grocery',
+  path: '/grocery',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const HealthRoute = HealthRouteImport.update({
   id: '/health',
   path: '/health',
@@ -58,6 +64,7 @@ export interface FileRoutesByFullPath {
   '/calendar': typeof CalendarRoute
   '/finance': typeof FinanceRoute
   '/food': typeof FoodRoute
+  '/grocery': typeof GroceryRoute
   '/health': typeof HealthRoute
   '/notes': typeof NotesRoute
   '/reminders': typeof RemindersRoute
@@ -67,6 +74,7 @@ export interface FileRoutesByTo {
   '/calendar': typeof CalendarRoute
   '/finance': typeof FinanceRoute
   '/food': typeof FoodRoute
+  '/grocery': typeof GroceryRoute
   '/health': typeof HealthRoute
   '/notes': typeof NotesRoute
   '/reminders': typeof RemindersRoute
@@ -77,6 +85,7 @@ export interface FileRoutesById {
   '/calendar': typeof CalendarRoute
   '/finance': typeof FinanceRoute
   '/food': typeof FoodRoute
+  '/grocery': typeof GroceryRoute
   '/health': typeof HealthRoute
   '/notes': typeof NotesRoute
   '/reminders': typeof RemindersRoute
@@ -88,6 +97,7 @@ export interface FileRouteTypes {
     | '/calendar'
     | '/finance'
     | '/food'
+    | '/grocery'
     | '/health'
     | '/notes'
     | '/reminders'
@@ -97,6 +107,7 @@ export interface FileRouteTypes {
     | '/calendar'
     | '/finance'
     | '/food'
+    | '/grocery'
     | '/health'
     | '/notes'
     | '/reminders'
@@ -106,6 +117,7 @@ export interface FileRouteTypes {
     | '/calendar'
     | '/finance'
     | '/food'
+    | '/grocery'
     | '/health'
     | '/notes'
     | '/reminders'
@@ -116,6 +128,7 @@ export interface RootRouteChildren {
   CalendarRoute: typeof CalendarRoute
   FinanceRoute: typeof FinanceRoute
   FoodRoute: typeof FoodRoute
+  GroceryRoute: typeof GroceryRoute
   HealthRoute: typeof HealthRoute
   NotesRoute: typeof NotesRoute
   RemindersRoute: typeof RemindersRoute
@@ -151,6 +164,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FoodRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/grocery': {
+      id: '/grocery'
+      path: '/grocery'
+      fullPath: '/grocery'
+      preLoaderRoute: typeof GroceryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/health': {
       id: '/health'
       path: '/health'
@@ -180,6 +200,7 @@ const rootRouteChildren: RootRouteChildren = {
   CalendarRoute: CalendarRoute,
   FinanceRoute: FinanceRoute,
   FoodRoute: FoodRoute,
+  GroceryRoute: GroceryRoute,
   HealthRoute: HealthRoute,
   NotesRoute: NotesRoute,
   RemindersRoute: RemindersRoute,
