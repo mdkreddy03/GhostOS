@@ -23,14 +23,14 @@ import { Input } from "@/components/ui/input";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Ghost OS — Today" },
+      { title: "GhostOS" },
       {
         name: "description",
         content:
-          "Your day at a glance: weather, high, medium and low priorities, money left this month and Ghost AI.",
+          "GhostOS is a local-first workspace dashboard designed to organize tools, track metrics, and manage automated workflows through a clean, customizable interface.",
       },
-      { property: "og:title", content: "Ghost OS — Today" },
-      { property: "og:description", content: "Your day at a glance, powered by Ghost AI." },
+      { property: "og:title", content: "GhostOS" },
+      { property: "og:description", content: "GhostOS is a local-first workspace dashboard designed to organize tools, track metrics, and manage automated workflows through a clean, customizable interface." },
     ],
   }),
   component: () => (

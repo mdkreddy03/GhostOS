@@ -79,19 +79,23 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Ghost OS — Your personal life operating system" },
+      { title: "GhostOS" },
       {
         name: "description",
         content:
-          "Ghost OS keeps your tasks, reminders, bills, health, food and notes in one calm private dashboard with an AI assistant.",
+          "GhostOS is a local-first workspace dashboard designed to organize tools, track metrics, and manage automated workflows through a clean, customizable interface.",
       },
-      { property: "og:title", content: "Ghost OS — Your personal life operating system" },
+      { property: "og:title", content: "GhostOS" },
       {
         property: "og:description",
-        content: "Tasks, reminders, money, health and food in one private, local-first dashboard.",
+        content: "GhostOS is a local-first workspace dashboard designed to organize tools, track metrics, and manage automated workflows through a clean, customizable interface.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "GhostOS" },
+      { name: "twitter:description", content: "GhostOS is a local-first workspace dashboard designed to organize tools, track metrics, and manage automated workflows through a clean, customizable interface." },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/64752e22-f624-40b9-837f-2288673e24d2" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/64752e22-f624-40b9-837f-2288673e24d2" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
@@ -101,7 +105,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap",
       },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
     ],
   }),
   shellComponent: RootShell,
