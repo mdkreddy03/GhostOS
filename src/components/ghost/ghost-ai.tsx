@@ -38,7 +38,7 @@ export function useGhostContext() {
 }
 
 export function GhostChat({ compact = false }: { compact?: boolean }) {
-  const system = useGhostSystemPrompt();
+  const ghostContext = useGhostContext();
   const { state } = useGhost();
   const call = useServerFn(ghostAi);
   const [messages, setMessages] = useState<Msg[]>([
