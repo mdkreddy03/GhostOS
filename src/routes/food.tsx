@@ -29,7 +29,7 @@ export const Route = createFileRoute("/food")({
 
 function FoodPage() {
   const { state, update } = useGhost();
-  const system = useGhostSystemPrompt();
+  const ghostContext = useGhostContext();
   const call = useServerFn(ghostAi);
   const [craving, setCraving] = useState("");
   const [result, setResult] = useState("");
