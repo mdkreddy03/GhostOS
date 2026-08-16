@@ -5,7 +5,7 @@ import { ChefHat, Trash2 } from "lucide-react";
 
 import { Gate } from "@/components/ghost/gate";
 import { Tile } from "@/components/ghost/shell";
-import { useGhostSystemPrompt } from "@/components/ghost/ghost-ai";
+import { useGhostContext } from "@/components/ghost/ghost-ai";
 import { ghostAi } from "@/lib/ai.functions";
 import { useGhost, uid } from "@/lib/ghost-store";
 import { Button } from "@/components/ui/button";
