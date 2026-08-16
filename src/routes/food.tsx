@@ -5,7 +5,7 @@ import { ChefHat, Trash2 } from "lucide-react";
 
 import { Gate } from "@/components/ghost/gate";
 import { Tile } from "@/components/ghost/shell";
-import { useGhostSystemPrompt } from "@/components/ghost/ghost-ai";
+import { useGhostContext } from "@/components/ghost/ghost-ai";
 import { ghostAi } from "@/lib/ai.functions";
 import { useGhost, uid } from "@/lib/ghost-store";
 import { Button } from "@/components/ui/button";
@@ -29,7 +29,7 @@ export const Route = createFileRoute("/food")({
 
 function FoodPage() {
   const { state, update } = useGhost();
-  const system = useGhostSystemPrompt();
+  const ghostContext = useGhostContext();
   const call = useServerFn(ghostAi);
   const [craving, setCraving] = useState("");
   const [result, setResult] = useState("");
@@ -41,11 +41,12 @@ function FoodPage() {
     try {
       const res = await call({
         data: {
-          system: `${system}\nYou are helping with cooking. Reply with one recipe: title, ingredients list, then numbered steps. Keep it under 250 words and respect their health conditions.`,
+          mode: "recipe" as const,
+          context: ghostContext,
           messages: [
             {
               role: "user" as const,
-              content: `Suggest a recipe. Craving: ${craving || "anything good"}. Ingredients I likely have: ${
+              content: `Suggest a recipe. Craving: ${craving.slice(0, 200) || "anything good"}. Ingredients I likely have: ${
                 state.grocery.map((g) => g.item).join(", ") || "basic pantry staples"
               }.`,
             },
