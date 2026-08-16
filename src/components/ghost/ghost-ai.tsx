@@ -58,7 +58,13 @@ export function GhostChat({ compact = false }: { compact?: boolean }) {
     setInput("");
     setBusy(true);
     try {
-      const res = await call({ data: { system, messages: next.slice(-12) } });
+      const res = await call({
+        data: {
+          mode: "chat" as const,
+          context: ghostContext,
+          messages: next.slice(-12).map((m) => ({ role: m.role, content: m.content.slice(0, 2000) })),
+        },
+      });
       setMessages([...next, { role: "assistant", content: res.text }]);
     } catch {
       setMessages([...next, { role: "assistant", content: "I couldn't reach my brain just now. Try again." }]);
