@@ -46,7 +46,7 @@ function FoodPage() {
           messages: [
             {
               role: "user" as const,
-              content: `Suggest a recipe. Craving: ${craving || "anything good"}. Ingredients I likely have: ${
+              content: `Suggest a recipe. Craving: ${craving.slice(0, 200) || "anything good"}. Ingredients I likely have: ${
                 state.grocery.map((g) => g.item).join(", ") || "basic pantry staples"
               }.`,
             },
