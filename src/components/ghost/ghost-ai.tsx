@@ -10,21 +10,31 @@ import { cn } from "@/lib/utils";
 
 type Msg = { role: "user" | "assistant"; content: string };
 
-export function useGhostSystemPrompt() {
+const clip = (s: string, max: number) => s.slice(0, max);
+
+export function useGhostContext() {
   const { state } = useGhost();
   const priorities = buildPriorities(state).slice(0, 12);
-  return [
-    "You are Ghost, a warm, sharp personal life assistant inside the user's Ghost OS.",
-    "Be concise, practical and specific. Use the user's own data below.",
-    `User: ${state.profile.fullName || state.account?.username || "friend"}, ${state.profile.occupation || "unknown job"}, ${state.profile.location || "unknown location"}.`,
-    `Goals: ${state.profile.goals || "none stated"}. Vibe: ${state.profile.vibe || "n/a"}.`,
-    `Monthly income: ${money(monthlyIncome(state.finance))}. Cash on hand: ${money(state.finance.cash)}.`,
-    `Obligations: ${state.finance.obligations.map((o) => `${o.label} ${money(o.amount)} due ${o.dueDate}`).join("; ") || "none"}.`,
-    `Health: ${state.health.weightKg || "?"}kg, ${state.health.heightCm || "?"}cm, age ${state.health.age || "?"}, activity ${state.health.activity}. Conditions: ${state.health.conditions || "none"}. Meds: ${state.health.medications || "none"}.`,
-    `Upcoming: ${priorities.map((p) => `${p.title} (${p.date}, ${p.days}d)`).join("; ") || "nothing scheduled"}.`,
-    `Notes titles: ${state.notes.map((n) => n.title).join(", ") || "none"}.`,
-    `Grocery staples: ${state.grocery.map((g) => g.item).join(", ") || "none"}.`,
-  ].join("\n");
+  return {
+    name: clip(state.profile.fullName || state.account?.username || "", 60),
+    occupation: clip(state.profile.occupation || "", 80),
+    location: clip(state.profile.location || "", 80),
+    goals: clip(state.profile.goals || "", 300),
+    vibe: clip(state.profile.vibe || "", 80),
+    income: clip(money(monthlyIncome(state.finance)), 40),
+    cash: clip(money(state.finance.cash), 40),
+    obligations: clip(
+      state.finance.obligations.map((o) => `${o.label} ${money(o.amount)} due ${o.dueDate}`).join("; "),
+      600,
+    ),
+    health: clip(
+      `${state.health.weightKg || "?"}kg, ${state.health.heightCm || "?"}cm, age ${state.health.age || "?"}, activity ${state.health.activity}. Conditions: ${state.health.conditions || "none"}. Meds: ${state.health.medications || "none"}`,
+      400,
+    ),
+    upcoming: clip(priorities.map((p) => `${p.title} (${p.date}, ${p.days}d)`).join("; "), 600),
+    notes: clip(state.notes.map((n) => n.title).join(", "), 400),
+    grocery: clip(state.grocery.map((g) => g.item).join(", "), 400),
+  };
 }
 
 export function GhostChat({ compact = false }: { compact?: boolean }) {
