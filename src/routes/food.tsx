@@ -41,7 +41,8 @@ function FoodPage() {
     try {
       const res = await call({
         data: {
-          system: `${system}\nYou are helping with cooking. Reply with one recipe: title, ingredients list, then numbered steps. Keep it under 250 words and respect their health conditions.`,
+          mode: "recipe" as const,
+          context: ghostContext,
           messages: [
             {
               role: "user" as const,
